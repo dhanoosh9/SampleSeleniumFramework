@@ -6,8 +6,12 @@ import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import io.github.bonigarcia.wdm.WebDriverManager;
 
+import com.aventstack.extentreports.ExtentReports;
+import com.aventstack.extentreports.ExtentTest;
+
 public class BaseClass {
 
+<<<<<<< HEAD
 	public static WebDriver driver;
 
 	public static WebDriver launchbrowser(String browsername) {
@@ -45,5 +49,10 @@ public class BaseClass {
 	
 	
 	
+=======
+	public WebDriver driver;
+	public ExtentReports extent = new ExtentReports();
+	public ExtentTest test;
+>>>>>>> master
 
 }
