@@ -4,17 +4,22 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
-import io.github.bonigarcia.wdm.WebDriverManager;
+import org.testng.annotations.AfterClass;
+import org.testng.annotations.BeforeClass;
 
 import com.aventstack.extentreports.ExtentReports;
 import com.aventstack.extentreports.ExtentTest;
 
+import io.github.bonigarcia.wdm.WebDriverManager;
+
 public class BaseClass {
 
-<<<<<<< HEAD
-	public static WebDriver driver;
 
-	public static WebDriver launchbrowser(String browsername) {
+	public WebDriver driver;
+	public ExtentReports extent = new ExtentReports();
+    public ExtentTest test;
+    @BeforeClass
+	public void launchbrowser(String browsername) {
 		if (browsername.equals("chrome")) {
 			WebDriverManager.chromedriver().setup();
 			driver = new ChromeDriver();
@@ -23,36 +28,26 @@ public class BaseClass {
 			WebDriverManager.firefoxdriver().setup();
 			driver = new FirefoxDriver();
 		}
-		return driver;
+		
 	}
-
-	public static void closeBrowser() {
-		driver.close();
+    @AfterClass
+	public void closeBrowser() {
+		driver.quit();
 	}
 	
-	public static void click(By element) {
+	public void click(By element) {
 		driver.findElement(element).click();
 	}
 	
-	public static void sendKeys(By element) {
+	public void sendKeys(By element) {
 		driver.findElement(element).sendKeys();
 	}
 	
-	public static void select() {
+	public void select() {
 		
 	}
 	
 	
 	
-	
-	
-	
-	
-	
-=======
-	public WebDriver driver;
-	public ExtentReports extent = new ExtentReports();
-	public ExtentTest test;
->>>>>>> master
 
 }
