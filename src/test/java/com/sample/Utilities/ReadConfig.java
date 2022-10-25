@@ -43,4 +43,10 @@ public class ReadConfig {
 		return password;
 	}
 
+	public int getTimeout() {
+		String time = prop.getProperty("timeout");
+		int timeout = Integer.parseInt(time);
+		return timeout;
+	}
+
 }
