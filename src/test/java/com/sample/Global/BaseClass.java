@@ -2,6 +2,7 @@ package com.sample.Global;
 
 import java.time.Duration;
 
+import org.openqa.selenium.Alert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
@@ -90,6 +91,31 @@ public class BaseClass {
 		wait = new WebDriverWait(driver, Duration.ofMillis(timeout));
 		Actions action = new Actions(driver);
 		action.moveToElement(wait.until(ExpectedConditions.visibilityOfElementLocated(element))).perform();
+	}
+	
+	// alerts
+	public void alerts(By element) {
+		wait= new WebDriverWait(driver, Duration.ofMillis(timeout));
+		driver.switchTo().alert().accept();
+		
+	}
+	
+	public void doubleClick(By element) {
+		wait = new WebDriverWait(driver, Duration.ofMillis(timeout));
+		Actions action=new Actions(driver);
+		action.doubleClick(wait.until(ExpectedConditions.visibilityOfElementLocated(element))).perform();
+	}
+	
+	public void dragAndDrop(By element) {
+		wait = new WebDriverWait(driver, Duration.ofMillis(timeout));
+		Actions action=new Actions(driver);
+		action.dragAndDrop(null, null).build().perform();
+	}
+	
+	public void rightClick(By element) {
+		wait = new WebDriverWait(driver, Duration.ofMillis(timeout));
+		Actions action=new Actions(driver);
+		action.contextClick(wait.until(ExpectedConditions.visibilityOfElementLocated(element))).perform();
 	}
 
 }
