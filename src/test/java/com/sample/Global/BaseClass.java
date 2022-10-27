@@ -2,7 +2,6 @@ package com.sample.Global;
 
 import java.time.Duration;
 
-import org.openqa.selenium.Alert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
@@ -23,11 +22,11 @@ import io.github.bonigarcia.wdm.WebDriverManager;
 
 public class BaseClass {
 
-	public WebDriver driver;
+	public static WebDriver driver;
 	public WebDriverWait wait;
 
-	public ExtentReports extent = new ExtentReports();
-	public ExtentTest test;
+	public static ExtentReports extent = new ExtentReports();
+	public static ExtentTest test;
 
 	ReadConfig readconfig = new ReadConfig();
 	public String browsername = readconfig.getbrowserName();
@@ -92,29 +91,30 @@ public class BaseClass {
 		Actions action = new Actions(driver);
 		action.moveToElement(wait.until(ExpectedConditions.visibilityOfElementLocated(element))).perform();
 	}
-	
+
 	// alerts
 	public void alerts(By element) {
-		wait= new WebDriverWait(driver, Duration.ofMillis(timeout));
+		wait = new WebDriverWait(driver, Duration.ofMillis(timeout));
 		driver.switchTo().alert().accept();
-		
+
 	}
-	
+
 	public void doubleClick(By element) {
 		wait = new WebDriverWait(driver, Duration.ofMillis(timeout));
-		Actions action=new Actions(driver);
+		Actions action = new Actions(driver);
 		action.doubleClick(wait.until(ExpectedConditions.visibilityOfElementLocated(element))).perform();
 	}
-	
-	public void dragAndDrop(By element) {
+
+	public void dragAndDrop(By drag, By drop) {
 		wait = new WebDriverWait(driver, Duration.ofMillis(timeout));
-		Actions action=new Actions(driver);
-		action.dragAndDrop(null, null).build().perform();
+		Actions action = new Actions(driver);
+		action.dragAndDrop(wait.until(ExpectedConditions.visibilityOfElementLocated(drag)),
+				wait.until(ExpectedConditions.visibilityOfElementLocated(drop))).build().perform();
 	}
-	
+
 	public void rightClick(By element) {
 		wait = new WebDriverWait(driver, Duration.ofMillis(timeout));
-		Actions action=new Actions(driver);
+		Actions action = new Actions(driver);
 		action.contextClick(wait.until(ExpectedConditions.visibilityOfElementLocated(element))).perform();
 	}
 
