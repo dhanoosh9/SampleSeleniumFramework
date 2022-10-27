@@ -22,11 +22,11 @@ import io.github.bonigarcia.wdm.WebDriverManager;
 
 public class BaseClass {
 
-	public WebDriver driver;
+	public static WebDriver driver;
 	public WebDriverWait wait;
 
-	public ExtentReports extent = new ExtentReports();
-	public ExtentTest test;
+	public static ExtentReports extent = new ExtentReports();
+	public static ExtentTest test;
 
 	ReadConfig readconfig = new ReadConfig();
 	public String browsername = readconfig.getbrowserName();

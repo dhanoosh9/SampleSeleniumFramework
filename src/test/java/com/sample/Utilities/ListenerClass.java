@@ -34,8 +34,8 @@ public class ListenerClass extends BaseClass implements ITestListener {
 	}
 
 	public void onTestFailure(ITestResult result) {
-		test.fail(result.getThrowable());
 		test.fail(result.getName());
+		test.fail(result.getThrowable());
 		try {
 			test.addScreenCaptureFromPath(capturescreenshot());
 		} catch (IOException e) {
@@ -60,7 +60,7 @@ public class ListenerClass extends BaseClass implements ITestListener {
 		extent.flush();
 	}
 
-	public String capturescreenshot() throws IOException {
+	public static String capturescreenshot() throws IOException {
 		Date currentdate = new Date();
 		String time = currentdate.toString().replace(" ", "-").replace(":", "-");
 		File srcfile = ((TakesScreenshot) driver).getScreenshotAs(OutputType.FILE);

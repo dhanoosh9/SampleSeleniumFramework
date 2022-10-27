@@ -2,36 +2,36 @@
 <testng-results skipped="0" failed="0" ignored="0" total="2" passed="2">
   <reporter-output>
   </reporter-output>
-  <suite name="Default suite" duration-ms="12144" started-at="2022-10-26T15:23:33 IST" finished-at="2022-10-26T15:23:45 IST">
+  <suite name="Suite" duration-ms="12491" started-at="2022-10-27T15:42:24 IST" finished-at="2022-10-27T15:42:36 IST">
     <groups>
     </groups>
-    <test name="Default test" duration-ms="12144" started-at="2022-10-26T15:23:33 IST" finished-at="2022-10-26T15:23:45 IST">
+    <test name="Test" duration-ms="12491" started-at="2022-10-27T15:42:24 IST" finished-at="2022-10-27T15:42:36 IST">
       <class name="com.sample.Tests.SampleTest">
-        <test-method status="PASS" signature="setUp()[pri:0, instance:com.sample.Tests.SampleTest@1460a8c0]" name="setUp" is-config="true" duration-ms="6267" started-at="2022-10-26T15:23:33 IST" finished-at="2022-10-26T15:23:39 IST">
+        <test-method status="PASS" signature="setUp()[pri:0, instance:com.sample.Tests.SampleTest@7a52f2a2]" name="setUp" is-config="true" duration-ms="6221" started-at="2022-10-27T15:42:24 IST" finished-at="2022-10-27T15:42:30 IST">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- setUp -->
-        <test-method status="PASS" signature="byTest()[pri:0, instance:com.sample.Tests.SampleTest@1460a8c0]" name="byTest" duration-ms="598" started-at="2022-10-26T15:23:39 IST" finished-at="2022-10-26T15:23:40 IST">
+        <test-method status="PASS" signature="byTest()[pri:0, instance:com.sample.Tests.SampleTest@7a52f2a2]" name="byTest" duration-ms="604" started-at="2022-10-27T15:42:30 IST" finished-at="2022-10-27T15:42:31 IST">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- byTest -->
-        <test-method status="PASS" signature="tearDown()[pri:0, instance:com.sample.Tests.SampleTest@1460a8c0]" name="tearDown" is-config="true" duration-ms="776" started-at="2022-10-26T15:23:40 IST" finished-at="2022-10-26T15:23:40 IST">
+        <test-method status="PASS" signature="tearDown()[pri:0, instance:com.sample.Tests.SampleTest@7a52f2a2]" name="tearDown" is-config="true" duration-ms="791" started-at="2022-10-27T15:42:31 IST" finished-at="2022-10-27T15:42:32 IST">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- tearDown -->
-        <test-method status="PASS" signature="setUp()[pri:0, instance:com.sample.Tests.SampleTest@1460a8c0]" name="setUp" is-config="true" duration-ms="3243" started-at="2022-10-26T15:23:40 IST" finished-at="2022-10-26T15:23:44 IST">
+        <test-method status="PASS" signature="setUp()[pri:0, instance:com.sample.Tests.SampleTest@7a52f2a2]" name="setUp" is-config="true" duration-ms="3206" started-at="2022-10-27T15:42:32 IST" finished-at="2022-10-27T15:42:35 IST">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- setUp -->
-        <test-method status="PASS" signature="sampleTest()[pri:0, instance:com.sample.Tests.SampleTest@1460a8c0]" name="sampleTest" duration-ms="418" started-at="2022-10-26T15:23:44 IST" finished-at="2022-10-26T15:23:44 IST">
+        <test-method status="PASS" signature="sampleTest()[pri:0, instance:com.sample.Tests.SampleTest@7a52f2a2]" name="sampleTest" duration-ms="467" started-at="2022-10-27T15:42:35 IST" finished-at="2022-10-27T15:42:35 IST">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- sampleTest -->
-        <test-method status="PASS" signature="tearDown()[pri:0, instance:com.sample.Tests.SampleTest@1460a8c0]" name="tearDown" is-config="true" duration-ms="769" started-at="2022-10-26T15:23:44 IST" finished-at="2022-10-26T15:23:45 IST">
+        <test-method status="PASS" signature="tearDown()[pri:0, instance:com.sample.Tests.SampleTest@7a52f2a2]" name="tearDown" is-config="true" duration-ms="837" started-at="2022-10-27T15:42:35 IST" finished-at="2022-10-27T15:42:36 IST">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- tearDown -->
       </class> <!-- com.sample.Tests.SampleTest -->
-    </test> <!-- Default test -->
-  </suite> <!-- Default suite -->
+    </test> <!-- Test -->
+  </suite> <!-- Suite -->
 </testng-results>
