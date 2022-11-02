@@ -25,12 +25,9 @@ public class SampleTest extends BaseClass {
 //		driver.findElement(ByObjects.password).sendKeys("secret_sauce");
 //		driver.findElement(ByObjects.loginbtn).click();
 		test = extent.createTest("byTest").assignAuthor("Ananya").assignDevice("Hp Laptop");
-		sendKeys(ByObjects.username, "standard_user");
-		test.info("Entered the username");
-		sendKeys(ByObjects.password, "secret_sauce");
-		test.info("Entered the password");
-		click(ByObjects.loginbtn);
-		test.info("Clicked on login button");
+		sendKeys(ByObjects.username, "standard_user", "Entered the username");
+		sendKeys(ByObjects.password, "secret_sauce", "Entered the password");
+		click(ByObjects.loginbtn, "Clicked on login button");
 	}
 
 }
