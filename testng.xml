@@ -6,7 +6,7 @@
 	</listeners>
 	<test thread-count="5" name="Test">
 		<classes>
-			<class name="com.sample.Tests.SampleTest" />
+			<class name="com.sample.testRunner.TestRunner" />
 		</classes>
 	</test>
 </suite> 

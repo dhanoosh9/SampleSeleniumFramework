@@ -5,8 +5,6 @@ import java.time.Duration;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.openqa.selenium.By;
-import org.openqa.selenium.ElementClickInterceptedException;
-import org.openqa.selenium.StaleElementReferenceException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.edge.EdgeDriver;
@@ -15,6 +13,7 @@ import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
+import org.testng.Assert;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 
@@ -34,8 +33,9 @@ public class BaseClass {
 
 	ReadConfig readconfig = new ReadConfig();
 	public String browsername = readconfig.getGlobalValue("browser");
+	public String baseURL = readconfig.getGlobalValue("baseURL");
 	String time = readconfig.getGlobalValue("timeout");
-	public int timeout = Integer.parseInt(time);
+	int timeout = Integer.parseInt(time);
 
 	public static Logger logg = LogManager.getLogger(BaseClass.class);
 
@@ -51,9 +51,8 @@ public class BaseClass {
 			WebDriverManager.edgedriver().setup();
 			driver = new EdgeDriver();
 		}
-
 		driver.manage().window().maximize();
-		driver.get("https://www.saucedemo.com/");
+		driver.get(baseURL);
 	}
 
 	@AfterMethod
@@ -61,131 +60,92 @@ public class BaseClass {
 		driver.quit();
 	}
 
-	public void click(By element, String log) throws StaleElementReferenceException, ElementClickInterceptedException {
-		try {
-			wait = new WebDriverWait(driver, Duration.ofMillis(timeout));
-			wait.until(ExpectedConditions.elementToBeClickable(element)).click();
-			test.info(log);
-		} catch (StaleElementReferenceException e) {
-			System.out.println(e);
-			test.info(e.getMessage());
-			test.info(e.getCause());
-		}
+	public void click(By element, String log) {
+		wait = new WebDriverWait(driver, Duration.ofMillis(timeout));
+		wait.until(ExpectedConditions.elementToBeClickable(element)).click();
+		test.info(log);
 	}
 
 	public void sendKeys(By element, String text, String log) {
-		try {
-			wait = new WebDriverWait(driver, Duration.ofMillis(timeout));
-			wait.until(ExpectedConditions.visibilityOfElementLocated(element)).sendKeys(text);
-			test.info(log);
-		} catch (Exception e) {
-			e.printStackTrace();
-
-			test.info(e.getMessage());
-			logg.error(e.getMessage());
-
-		}
+		wait = new WebDriverWait(driver, Duration.ofMillis(timeout));
+		wait.until(ExpectedConditions.visibilityOfElementLocated(element)).sendKeys(text);
+		test.info(log);
 	}
 
 	// select by index
 	public void selectIndex(By element, int index, String log) {
-		try {
-			wait = new WebDriverWait(driver, Duration.ofMillis(timeout));
-			Select select = new Select(wait.until(ExpectedConditions.visibilityOfElementLocated(element)));
-			select.selectByIndex(index);
-		} catch (Exception e) {
-			System.out.println(e.getMessage());
-			test.info(e.getMessage());
-			test.info(e.getCause());
-		}
+		wait = new WebDriverWait(driver, Duration.ofMillis(timeout));
+		Select select = new Select(wait.until(ExpectedConditions.visibilityOfElementLocated(element)));
+		select.selectByIndex(index);
+		test.info(log);
 	}
 
 	// select by value
 	public void selectValue(By element, String value, String log) {
-		try {
-			wait = new WebDriverWait(driver, Duration.ofMillis(timeout));
-			Select select = new Select(wait.until(ExpectedConditions.visibilityOfElementLocated(element)));
-			select.selectByValue(value);
-			test.info(log);
-		} catch (Exception e) {
-			System.out.println(e.getMessage());
-			test.info(e.getMessage());
-			test.info(e.getCause());
-		}
+		wait = new WebDriverWait(driver, Duration.ofMillis(timeout));
+		Select select = new Select(wait.until(ExpectedConditions.visibilityOfElementLocated(element)));
+		select.selectByValue(value);
+		test.info(log);
 	}
 
 	// select by visibletext
 	public void selectVisibleText(By element, String visibleText, String log) {
-		try {
-			wait = new WebDriverWait(driver, Duration.ofMillis(timeout));
-			Select select = new Select(wait.until(ExpectedConditions.visibilityOfElementLocated(element)));
-			select.selectByVisibleText(visibleText);
-			test.info(log);
-		} catch (Exception e) {
-			System.out.println(e.getMessage());
-			test.info(e.getMessage());
-			test.info(e.getCause());
-		}
+		wait = new WebDriverWait(driver, Duration.ofMillis(timeout));
+		Select select = new Select(wait.until(ExpectedConditions.visibilityOfElementLocated(element)));
+		select.selectByVisibleText(visibleText);
+		test.info(log);
+
+	}
+	
+	// alerts
+	public void alertAccept(By element, String log) {
+		wait = new WebDriverWait(driver, Duration.ofMillis(timeout));
+		wait.until(ExpectedConditions.alertIsPresent());
+		driver.switchTo().alert().accept();
+		test.info(log);
+	}
+	
+	public void clear(By element, String log) {
+		wait = new WebDriverWait(driver, Duration.ofMillis(timeout));
+		wait.until(ExpectedConditions.presenceOfElementLocated(element)).clear();
+		test.info(log);
 	}
 
 	// hover on element
 	public void hoverOnElement(By element, String log) {
-		try {
-			wait = new WebDriverWait(driver, Duration.ofMillis(timeout));
-			Actions action = new Actions(driver);
-			action.moveToElement(wait.until(ExpectedConditions.visibilityOfElementLocated(element))).perform();
-			test.info(log);
-		} catch (Exception e) {
-			System.out.println(e.getMessage());
-			test.info(e.getMessage());
-			test.info(e.getCause());
-		}
-	}
-
-	// alerts
-	public void alerts(By element) {
 		wait = new WebDriverWait(driver, Duration.ofMillis(timeout));
-		driver.switchTo().alert().accept();
-
+		Actions action = new Actions(driver);
+		action.moveToElement(wait.until(ExpectedConditions.visibilityOfElementLocated(element))).perform();
+		test.info(log);
 	}
+
 
 	public void doubleClick(By element, String log) {
-		try {
-			wait = new WebDriverWait(driver, Duration.ofMillis(timeout));
-			Actions action = new Actions(driver);
-			action.doubleClick(wait.until(ExpectedConditions.visibilityOfElementLocated(element))).perform();
-			test.info(log);
-		} catch (Exception e) {
-			System.out.println(e.getMessage());
-			test.info(e.getMessage());
-			test.info(e.getCause());
-		}
+		wait = new WebDriverWait(driver, Duration.ofMillis(timeout));
+		Actions action = new Actions(driver);
+		action.doubleClick(wait.until(ExpectedConditions.visibilityOfElementLocated(element))).perform();
+		test.info(log);
 	}
 
 	public void dragAndDrop(By drag, By drop, String log) {
-		try {
-			wait = new WebDriverWait(driver, Duration.ofMillis(timeout));
-			Actions action = new Actions(driver);
-			action.dragAndDrop(wait.until(ExpectedConditions.visibilityOfElementLocated(drag)),
-					wait.until(ExpectedConditions.visibilityOfElementLocated(drop))).build().perform();
-			test.info(log);
-		} catch (Exception e) {
-			System.out.println(e.getMessage());
-			test.info(e.getMessage());
-			test.info(e.getCause());
-		}
+		wait = new WebDriverWait(driver, Duration.ofMillis(timeout));
+		Actions action = new Actions(driver);
+		action.dragAndDrop(wait.until(ExpectedConditions.visibilityOfElementLocated(drag)),
+				wait.until(ExpectedConditions.visibilityOfElementLocated(drop))).build().perform();
+		test.info(log);
 	}
 
 	public void rightClick(By element, String log) {
-		try {
-			wait = new WebDriverWait(driver, Duration.ofMillis(timeout));
-			Actions action = new Actions(driver);
-			action.contextClick(wait.until(ExpectedConditions.visibilityOfElementLocated(element))).perform();
-		} catch (Exception e) {
-			System.out.println(e.getMessage());
-			test.info(e.getMessage());
-			test.info(e.getCause());
-		}
+		wait = new WebDriverWait(driver, Duration.ofMillis(timeout));
+		Actions action = new Actions(driver);
+		action.contextClick(wait.until(ExpectedConditions.visibilityOfElementLocated(element))).perform();
+		test.info(log);
+	}
+	
+	public void isDisplayed(By element) {
+		wait = new WebDriverWait(driver, Duration.ofMillis(timeout));
+		Boolean value = wait.until(ExpectedConditions.visibilityOfElementLocated(element)).isDisplayed();
+		Assert.assertTrue(value);
 	}
 
 }

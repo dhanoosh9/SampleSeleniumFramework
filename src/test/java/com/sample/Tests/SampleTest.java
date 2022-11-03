@@ -1,6 +1,5 @@
 package com.sample.Tests;
 
-import org.testng.Assert;
 import org.testng.annotations.Test;
 
 import com.sample.Global.BaseClass;
