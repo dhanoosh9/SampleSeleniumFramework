@@ -2,9 +2,11 @@ package com.sample.Global;
 
 import java.time.Duration;
 
+import org.apache.commons.lang3.RandomStringUtils;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.openqa.selenium.By;
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.edge.EdgeDriver;
@@ -72,6 +74,12 @@ public class BaseClass {
 		test.info(log);
 	}
 
+	public void clear(By element, String log) {
+		wait = new WebDriverWait(driver, Duration.ofMillis(timeout));
+		wait.until(ExpectedConditions.presenceOfElementLocated(element)).clear();
+		test.info(log);
+	}
+
 	// select by index
 	public void selectIndex(By element, int index, String log) {
 		wait = new WebDriverWait(driver, Duration.ofMillis(timeout));
@@ -88,27 +96,13 @@ public class BaseClass {
 		test.info(log);
 	}
 
-	// select by visibletext
+	// select by visible text
 	public void selectVisibleText(By element, String visibleText, String log) {
 		wait = new WebDriverWait(driver, Duration.ofMillis(timeout));
 		Select select = new Select(wait.until(ExpectedConditions.visibilityOfElementLocated(element)));
 		select.selectByVisibleText(visibleText);
 		test.info(log);
 
-	}
-	
-	// alerts
-	public void alertAccept(By element, String log) {
-		wait = new WebDriverWait(driver, Duration.ofMillis(timeout));
-		wait.until(ExpectedConditions.alertIsPresent());
-		driver.switchTo().alert().accept();
-		test.info(log);
-	}
-	
-	public void clear(By element, String log) {
-		wait = new WebDriverWait(driver, Duration.ofMillis(timeout));
-		wait.until(ExpectedConditions.presenceOfElementLocated(element)).clear();
-		test.info(log);
 	}
 
 	// hover on element
@@ -118,7 +112,6 @@ public class BaseClass {
 		action.moveToElement(wait.until(ExpectedConditions.visibilityOfElementLocated(element))).perform();
 		test.info(log);
 	}
-
 
 	public void doubleClick(By element, String log) {
 		wait = new WebDriverWait(driver, Duration.ofMillis(timeout));
@@ -141,11 +134,72 @@ public class BaseClass {
 		action.contextClick(wait.until(ExpectedConditions.visibilityOfElementLocated(element))).perform();
 		test.info(log);
 	}
-	
+
+	public void clickAndHold(By element, String log) {
+		wait = new WebDriverWait(driver, Duration.ofMillis(timeout));
+		Actions action = new Actions(driver);
+		action.clickAndHold();
+		test.info(log);
+	}
+
+	public void alertAccept(String log) {
+		wait = new WebDriverWait(driver, Duration.ofMillis(timeout));
+		wait.until(ExpectedConditions.alertIsPresent());
+		driver.switchTo().alert().accept();
+		test.info(log);
+	}
+
+	public void alertDismiss() {
+		wait = new WebDriverWait(driver, Duration.ofMillis(timeout));
+		wait.until(ExpectedConditions.alertIsPresent());
+		driver.switchTo().alert().dismiss();
+	}
+
+	public void alertSendKeys(String text) {
+		wait = new WebDriverWait(driver, Duration.ofMillis(timeout));
+		wait.until(ExpectedConditions.alertIsPresent());
+		driver.switchTo().alert().sendKeys(text);
+	}
+
+	// Scroll By Value
+	public void scrollDown(int value) {
+		JavascriptExecutor js = (JavascriptExecutor) driver;
+		js.executeScript("window.scrollBy(0," + value + ")");
+	}
+
+	// Scroll By element
+	public void scrollToElement(String element) {
+		JavascriptExecutor js = (JavascriptExecutor) driver;
+		js.executeScript("document.querySelector('" + element + "').scrollIntoView()");
+	}
+
 	public void isDisplayed(By element) {
 		wait = new WebDriverWait(driver, Duration.ofMillis(timeout));
 		Boolean value = wait.until(ExpectedConditions.visibilityOfElementLocated(element)).isDisplayed();
 		Assert.assertTrue(value);
 	}
 
+	public void isSelected(By element) {
+		wait = new WebDriverWait(driver, Duration.ofMillis(timeout));
+		Boolean value = wait.until(ExpectedConditions.visibilityOfElementLocated(element)).isSelected();
+		Assert.assertTrue(value);
+	}
+
+	public void isEnabled(By element) {
+		wait = new WebDriverWait(driver, Duration.ofMillis(timeout));
+		Boolean value = wait.until(ExpectedConditions.presenceOfElementLocated(element)).isEnabled();
+		Assert.assertTrue(value);
+	}
+
+	// creates a random number
+	public String randomNumber(int count) {
+		String randomNumber = RandomStringUtils.randomNumeric(count);
+		return randomNumber;
+	}
+
+	// creates a random String
+	public String randomString(int count) {
+		String randomString = RandomStringUtils.randomAlphabetic(count);
+		return randomString;
+	}
 }
