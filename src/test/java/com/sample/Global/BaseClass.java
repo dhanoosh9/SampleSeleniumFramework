@@ -23,7 +23,7 @@ import com.aventstack.extentreports.ExtentReports;
 import com.aventstack.extentreports.ExtentTest;
 import com.sample.Utilities.ReadConfig;
 
-import io.github.bonigarcia.wdm.WebDriverManager;
+
 
 public class BaseClass {
 
@@ -44,13 +44,10 @@ public class BaseClass {
 	@BeforeMethod
 	public void setUp() {
 		if (browsername.equalsIgnoreCase("chrome")) {
-			WebDriverManager.chromedriver().setup();
 			driver = new ChromeDriver();
 		} else if (browsername.equalsIgnoreCase("firefox")) {
-			WebDriverManager.firefoxdriver().setup();
 			driver = new FirefoxDriver();
 		} else if (browsername.equalsIgnoreCase("edge")) {
-			WebDriverManager.edgedriver().setup();
 			driver = new EdgeDriver();
 		}
 		driver.manage().window().maximize();
